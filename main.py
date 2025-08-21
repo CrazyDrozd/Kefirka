@@ -2,6 +2,7 @@ import sys
 sys.path.insert(1, "C:/Users/Drozd/Desktop/Kefirka/cogs")
 import general
 
+from random import randint
 import discord, os, tracemalloc, asyncio, datetime, colorama
 import utils as tool
 from utils import current_date, formatted_current_date, colors
@@ -21,6 +22,7 @@ class Kefirka(commands.Bot):
 	def __init__(self):
 		intents = discord.Intents.default()
 		intents.message_content = True
+		intents.messages = True
 		self.prefix = os.getenv('PREFIX')
 		self.token = os.getenv('TOKEN')
 		self.guild_id = int(os.getenv('GUILD_ID'))
@@ -35,7 +37,7 @@ class Kefirka(commands.Bot):
 				await self.load_extension(f'cogs.{cog}')
 				print(f"—— {colors['yellow']}cogs.{cog}{colors['end']} installed. ——")
 			except Exception as e:
-				print("An error occured during extension load: {e}")
+				print(f"An error occured during extension load: {e}")
 		print(f"{colors['cyan']}Finished installing.{colors['end']}")
 
 	async def on_ready(self):
@@ -64,14 +66,17 @@ class Kefirka(commands.Bot):
 
 	async def setup_hook(self):
 		try:
-		 	self.tree.copy_global_to(guild=discord.Object(id=self.guild_id))
+			self.tree.copy_global_to(guild=discord.Object(id=self.guild_id))
 			await self.tree.sync()
 			print(f"\n{colors['cyan']}Command tree has been synced with the guild.")
 		except Exception as e:
-			await ctx.send("An error occured during syncing: {e}")
-	
+			await ctx.send(f"An error occured during syncing: {e}")
+
+	async def on_message(self, message):
+		await self.process_commands(message)
+
 class HelpCommand(commands.MinimalHelpCommand):
-    	attributes = {
+	attributes = {
 		'name': "help",
 		'aliases': ["helpme"]
 	}
