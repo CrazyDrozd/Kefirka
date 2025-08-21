@@ -27,7 +27,7 @@ class General(commands.Cog):
 		await ctx.send(embed=about_embed)
 		print(f'{ctx.author.name} has called "about" command.')
 
-	@commands.hybrid_command(name="ping", description="Shows latency of the bot with an easter egg.")
+	@commands.hybrid_command(name="ping", description="Shows latency of the bot with an easter egg.", aliases=['Ping', 'pong', 'Pong', 'latency', 'Latency', 'ms'])
 	async def ping(self, ctx: commands.Context) -> None:
 		ping_fact = choice(ping_easter_eggs)
 		await ctx.send(f'*({round(self.bot.latency * 1000)}ms)* {ping_fact}')
@@ -37,6 +37,18 @@ class General(commands.Cog):
 	async def eastereggs(self, ctx: commands.Context) -> None:
 		await ctx.send(f'There are **{easter_eggs_amount}** easter eggs in **k!ping** at the moment.')
 		print(f'{ctx.author.name} has called "eastereggs" command.')
+
+	@commands.hybrid_command(name="ip", description="Generates a completely random IP.")
+	async def ip(self, ctx: commands.Context) -> None:
+		sentence = []
+		number = randint(100, 255)
+		sentence.append(number)
+		for i in range(3):
+			number = randint(1, 255)
+			sentence.append(number)
+		sentence_string = '.'.join(map(str, sentence))
+		await ctx.send(f'{sentence_string}')
+		print(f'{ctx.author.name} has called "ip" command.')
 
 async def setup(bot: commands.Bot):
 	await bot.add_cog(General(bot))
