@@ -37,7 +37,7 @@ class Kefirka(commands.Bot):
 				await self.load_extension(f'cogs.{cog}')
 				print(f"—— {colors['yellow']}cogs.{cog}{colors['end']} installed. ——")
 			except Exception as e:
-				print(f"An error occured during extension load: {e}")
+				print(f"{colors['red']}An error occured during extension load{colors['end']}: {e}")
 		print(f"{colors['cyan']}Finished installing.{colors['end']}")
 
 	async def on_ready(self):
