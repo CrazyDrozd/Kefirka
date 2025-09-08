@@ -1,5 +1,5 @@
 import discord, json
-from random import choice
+from random import choice, randint
 from discord.ext import commands
 
 with open('cogs/ping_facts.json', 'r', encoding='UTF-8') as local_file:
@@ -15,7 +15,7 @@ about_embed.add_field(name='Moderation (W.I.P)', value='Add some moderation util
 about_embed.add_field(name='', value='I will have much more features with time, just be patient!', inline=False)
 about_embed.add_field(name='', value='-# k!help for a list of available commands', inline=False)
 about_embed.add_field(name='', value='-# The bot is currently a prototype, not so much exist for now and a lot features may change in the future. Bugs also may be present.', inline=False)
-about_embed.set_footer(text="made by CrazyDrozd", icon_url="https://media.discordapp.net/attachments/467737191934853132/1407759570641883156/f0d79c2a8a60e972b0125f0d74222f90.png?ex=68a745c4&is=68a5f444&hm=c4e4a294d4e417796f216c923e7aad8c74472f1251f97d3f9f910217f986e11f&=&format=webp&quality=lossless&width=207&height=207")
+about_embed.set_footer(text="made by CrazyDrozd | v1.0.0-prototype", icon_url="https://media.discordapp.net/attachments/467737191934853132/1407759570641883156/f0d79c2a8a60e972b0125f0d74222f90.png?ex=68a745c4&is=68a5f444&hm=c4e4a294d4e417796f216c923e7aad8c74472f1251f97d3f9f910217f986e11f&=&format=webp&quality=lossless&width=207&height=207")
 about_embed.set_author(name="Kefirka", icon_url="https://media.discordapp.net/attachments/467737191934853132/1407755720354435224/image.png?ex=68a7422e&is=68a5f0ae&hm=7481e83cf1a564cf8aa3b4241e0803effd007caa10782f72170515f15c984056&=&format=webp&quality=lossless&width=868&height=868")
 
 class General(commands.Cog):
