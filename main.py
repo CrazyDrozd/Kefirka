@@ -1,6 +1,5 @@
 import sys
 sys.path.insert(1, "C:/Users/Drozd/Desktop/Kefirka/cogs")
-import general
 
 from random import randint
 import discord, os, tracemalloc, asyncio, datetime, colorama
@@ -27,6 +26,7 @@ class Kefirka(commands.Bot):
 		self.token = os.getenv('TOKEN')
 		self.guild_id = int(os.getenv('GUILD_ID'))
 		self.channel_id = int(os.getenv('CHANNEL_ID'))
+		self.version = "v1.0.1-prototype"
 		super().__init__(command_prefix=self.prefix, 
 						intents=intents)
 
@@ -46,6 +46,7 @@ class Kefirka(commands.Bot):
 			f"{colors['yellow']}Username{colors['end']}: {self.user.name}\n"
 			f"{colors['yellow']}ID{colors['end']}: {self.user.id}\n"
 			f"{colors['yellow']}Date{colors['end']}: {formatted_current_date}\n"
+			f"{colors['yellow']}Version{colors['end']}: {self.version}"
 			f"\n{colors['cyan']}———ATTR_TYPES———{colors['end']}\n"
 			f"{colors['yellow']}Token{colors['end']}: {type(self.token)}\n"
 			f"{colors['yellow']}Prefix{colors['end']}: {type(self.prefix)}\n"
