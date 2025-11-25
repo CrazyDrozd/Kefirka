@@ -1,6 +1,6 @@
-import discord, enum
+import discord, enum, json
 from discord.ext import commands
-from Character import Character
+from .Character import Character
 
 Characters = []
 
@@ -8,16 +8,8 @@ class isHidden(str, enum.Enum):
 	Yes = "Yes"
 	No = "No"
 
-Specials = [
-	# {"name": "", "health": , "spell_points": , "defence": ,weapon": "", "armor": "" "icon": "", "description": ""}
-	{"name": "Drozd Sandpiper", "health": 80, "spell_points": 5, "defence": 0, "weapon": "Long-Handed Wrench", "armor": None, "icon": "https://media.discordapp.net/attachments/467737191934853132/1409205861175398510/224_20250824190036.png?ex=68ac88bb&is=68ab373b&hm=7aee9cd0ded398d7c964b3085bd8d208646dc65eb03da52de32c1fb6801b4316&=&format=webp&quality=lossless&width=868&height=868", "description": "An anthropomorphic lynx of Russian heritage. He spent his childhood living in the Nordic part which made him be more resilient against cold and harsh weather."},
-	{"name": "Painiac", "health": 80, "spell_points": 5,  "defence": 0, "weapon": None, "armor": None, "icon": "https://media.discordapp.net/attachments/467737191934853132/1406556064253743134/i.png?ex=68a2e4ea&is=68a1936a&hm=fc75c27ee5f2247737b6a6a269a327d3126f8f324d81c8c0bd82911e0abb16ef&=&format=webp&quality=lossless&width=288&height=288", "description": "Random sheriff who have slept on Drozd`s girlfriend couch and snored really loud. "},
-	{"name": "ChocoCream", "health": 80, "spell_points": 5,  "defence": 0, "weapon": "Scarf-Hands", "armor": None, "icon": "https://media.discordapp.net/attachments/467737191934853132/1409197480767262882/226_20250824182644.png?ex=68ac80ed&is=68ab2f6d&hm=79c2e1ad5e629972cb8b7c23869b717c34d8b5338fcdd71c21abd27ea4edbe22&=&format=webp&quality=lossless&width=872&height=868", "description": "An anthropomorphic rabbit with a kind soul, armed with scarf-hands good for combat and utility."},
-	{"name": "Zakuro Hoshizaki", "health": 80, "spell_points": 5,  "defence": 0, "weapon": "Katanas", "armor": None, "icon": "https://media.discordapp.net/attachments/467737191934853132/1409312156045807707/228_20250825020309.png?ex=68acebb9&is=68ab9a39&hm=ad3fc138339681ce39458e30ae2333fbe10e2ecfa017f16a2f4892f2edf2ad62&=&format=webp&quality=lossless", "description": "bruh, your icon outline sucks, dude.."},
-	{"name": "Charlatan", "health": 55, "spell_points": 7, "defence": 0, "weapon": "Star Sigil", "armor": "Comedy Mask", "icon": "https://media.discordapp.net/attachments/467737191934853132/1409198647148675152/227_20250824183204.png?ex=68ac8203&is=68ab3083&hm=cd429483185fde506ea054987e0affe31acd85f4afd10cd67a2d423189cf8d62&=&format=webp&quality=lossless&width=553&height=781", "description": "A jester cursed by blood to a mask of comedic despair, with only hanging on to existence by a mere thread."},
-	{"name": "Magnesium", "health": 50, "spell_points": 15, "defence": 0, "weapon": None, "armor": None, "icon": "https://media.discordapp.net/attachments/467737191934853132/1409133996780163204/225_20250824141433.png?ex=68ac45cd&is=68aaf44d&hm=c8a70723e0b3308718b5406bb57af1b784a43fc6d92b56a55a710da6c21a69a6&=&format=webp&quality=lossless&width=337&height=371", "description": "Magnesium is very cheerful and positive egoed but also has very weird behavior you will see her staring into other cats souls deeply, randomly loudly sneezing like your average father, eating anything on the floor with the 5 second rule. Whenever she cannnot reach something she uses her tail to become taller to reach but if that does not work she'll get frustrated and get some stairs. She has intrusive thoughts of eating, biting and touching anything. She likes to scare other cats by holding a knife as a joke she would not actually stab someone unless she despises you."},
-	{"name": "Frisk", "health": 20, "spell_points": 5, "defence": 0, "weapon": "Stick", "armor": "Bandage", "icon": "https://media.discordapp.net/attachments/467737191934853132/1409317800421363732/229_20250825022534.png?ex=68acf0fb&is=68ab9f7b&hm=da716295a0eaced15e1efffd4eacbb78b962b10b2d8841a866b4086dda4c5681&=&format=webp&quality=lossless&width=777&height=862", "description": "You're filled with.. DETERMINATION. Frisk is a kid with a pacifistic traits and a stick who is able to revive themselves a lot of times during the battle, gaining +1 Defence each death. However, it cannot last for too long..."}
-]
+with open('cogs/specials.json', 'r', encoding='UTF-8') as local_file:
+	Specials = json.load(local_file)["specials"]
 
 battle_card_description_embed = discord.Embed(title="Battle Actions", description='', color = 0x26e1da)
 battle_card_description_embed.add_field(name=f'╰┈➤    PRIMARY. "Wastes your character turn and the turn goes to the next character by initiative."', value=f'''

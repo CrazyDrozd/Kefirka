@@ -1,5 +1,5 @@
 import sys
-sys.path.insert(1, "C:/Users/Drozd/Desktop/Kefirka/cogs")
+sys.path.insert(1, "C:/Users/Admin/Desktop/Kefirka/cogs")
 
 from random import randint
 import discord, os, tracemalloc, asyncio, datetime, colorama
@@ -108,4 +108,4 @@ if __name__ == "__main__":
 		try:
 			asyncio.run(main())
 		except Exception as e:
-			print("An error occured: {e}")
+			print(f"An error occured: {e}")
